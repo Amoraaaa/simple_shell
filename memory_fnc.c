@@ -86,7 +86,7 @@ void *_calloc(unsigned int k, unsigned int l)
 	if (m == NULL) /* If allocation failed, return NULL */
 		return (NULL);
 
-	_memset(m, 0, (k * l)); /* Initialize all bytes of the newly allocated memory to zero */
+	_memset(m, 0, (k * l)); /* Initialize all bytes of the newly */
 
 	return (m); /* Return the pointer to the newly allocated memory */
 }
@@ -103,7 +103,7 @@ void *_calloc(unsigned int k, unsigned int l)
 void *_realloc(void *n, unsigned int o, unsigned int p)
 {
 	void *q;
-	unsigned int r = 0, s = o < p ? o : p; /* Determine the smallest of old and new sizes */
+	unsigned int r = 0, s = o < p ? o : p; /* Determine the smallest */
 
 	if (o == p) /* If old size equals new size, return original pointr */
 		return (n);
