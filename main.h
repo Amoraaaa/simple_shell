@@ -36,7 +36,7 @@ int shell_handler(char []);
 char *full_path(char *, char *);
 int fork_process(char *[], char *[], char *);
 
-void free_arr(char **);
+void afree(char **);
 
 char *_memcpy(char *, char *, unsigned int);
 char *_memset(char *, char, unsigned int);

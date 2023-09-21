@@ -7,6 +7,7 @@
 *
 * Return: 0 (Exit_Success), negative (Exit_Failure)
 */
+
 int main_shell(char *x1)
 {
 	char *y1 = NULL, *z1 = NULL;
@@ -47,12 +48,10 @@ int main_shell(char *x1)
 	free(y1);
 	if (e1)
 		_putchar('\n');
-	_exit(EXIT_STATUS);
+	exit(EXIT_STATUS);
 }
 
-/**
-* execute_command - forks a new process to run the command
-*
+/*
 * @f: array of arguments from the stdin
 * @g: environment of the current running process
 * @h: environment path
@@ -134,7 +133,7 @@ int shell_handler(char n[])
 		return (r);
 	}
 
-	r = execute_command(o, environ, q);
+	r = execute_command(o, __environ, q);
 	free(q);
 
 	return (r);
