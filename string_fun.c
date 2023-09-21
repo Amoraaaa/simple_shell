@@ -1,4 +1,4 @@
-#inchlude "main.h"
+#include "main.h"
 
 /**
  * _isdigit - checks if it's digit or not
@@ -25,6 +25,7 @@ int _isdigit(int ch)
 void _puts(char *str)
 {
 	int k = 0;
+
 	while (str[k])
 		_putchar(str[k]), k++;
 }
@@ -35,6 +36,7 @@ void _puts(char *str)
  *
  * Return: 1 (success), -1 otherwise
  */
+
 int _putchar(char ch)
 {
 	return (write(STDOUT_FILENO, &ch, 1));
@@ -97,3 +99,4 @@ char *_strncat(char *dest, char *src, int n)
 
 	return (dest);
 }
+

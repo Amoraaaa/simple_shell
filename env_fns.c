@@ -16,10 +16,10 @@ char *_get_env(char *env_name)
 	while (env[i])
 	{
 		var = _strdup(env[i]);
-		str_tok = strstr_tok(var, "=");
+		str_tok = strtok(var, "=");
 		if (_strcmp(str_tok, env_name) == 0)
 		{
-			str_tok = strstr_tok(NULL, "=");
+			str_tok = strtok(NULL, "=");
 
 			/** if str_tok is null then braek */
 			if (!str_tok)
@@ -56,3 +56,4 @@ void print_env(void)
 		env++;
 	}
 }
+

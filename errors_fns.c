@@ -63,5 +63,6 @@ void perm_denied_err(char *prog_name, char *fname, unsigned int ctr)
 	/** free the counter after finished */
 	free(count);
 
-	EXIT_ST = 126;
+	EXIT_STATUS = 126;
 }
+

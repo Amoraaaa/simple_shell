@@ -79,3 +79,4 @@ char *full_path(char *arg_zero, char *path)
 
 	return (final_path);
 }
+
