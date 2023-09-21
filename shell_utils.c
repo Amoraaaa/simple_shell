@@ -106,7 +106,7 @@ char *trim_string(char *f)
 /**
  * count_words - counts the words in a string
  *
- * @g: string input
+ * @g: string input size
  *
  * Return: number of counted words
 */
@@ -124,4 +124,3 @@ unsigned int count_words(char *g)
 
 	return (len + 1);
 }
-
