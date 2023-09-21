@@ -46,7 +46,7 @@ int main_shell(char *x1)
 	}
 	free(y1);
 	if (e1)
-		__putchar('\n');
+		_putchar('\n');
 	_exit(EXIT_STATUS);
 }
 

@@ -12,7 +12,7 @@
 int main(__attribute__((unused))int argument_count, char *argument_values[])
 {
 	/*Call the shell function with the first argument*/
-	shell(argument_values[0]);
+	main_shell(argument_values[0]);
 
 	/* Return 0 to indicate successful execution*/
 	return (0);

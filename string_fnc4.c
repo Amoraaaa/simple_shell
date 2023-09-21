@@ -1,12 +1,13 @@
 #include "main.h"
 
 /**
- * _puts_err prints a string to stderr
+ * _puts_err - prints a string to stderr
  *
  * @a1: string to print
  *
  * Return: Always void
- */
+*/
+
 void  _puts_err(char *a1)
 {
 	int b1 = 0;
@@ -47,12 +48,13 @@ int starts_with(char *a2, char *b2)
 }
 
 /**
- * rev_string - reverses a string
+ * reverse_string - reverses a string
  *
  * @a3: string to be reversed
  *
  * Return: Always void
- */
+*/
+
 void reverse_string(char *a3)
 {
 	int str_size = strlen(a3), i;
@@ -120,12 +122,13 @@ char *to_str(unsigned int a4)
 }
 
 /**
- * _putchar - prints a char to stderr
+ * _putchar_err - prints a char to stderr
  *
  * @a5: char to be printed
  *
  * Return: number of chars printed
- */
+*/
+
 int  _putchar_err(char a5)
 {
 	/* Write one character to stderr and return the number*/
