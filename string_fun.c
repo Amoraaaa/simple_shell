@@ -1,102 +1,95 @@
 #include "main.h"
 
 /**
- * _isdigit - checks if it's digit or not
- * @ch: charcter to be checked
+ * _strcpy - copies string 2 into string 1
  *
- * Return: 1 (success), 0 otherwise
+ * @dest: the string to be copied into
+ * @src: the string to copy from
+ *
+ * Return: pointer to the copied string
  */
 
-int _isdigit(int ch)
+char *_strcpy(char *dest, char *src)
 {
-	if (ch >= 48 && ch < 58)
-		return (1);
+	int i;
 
-	return (0);
+	for (i = 0; *(src + i) != '\0'; i++)
+	{
+		dest[i] = *(src + i);
+	}
+	dest[i] = *(src + i);
+	return (dest);
 }
 
 /**
- * _puts - function to prints a string
- * @str: string input
+ * _atoi - converts a string to an integer
  *
- * Return: void
+ * @s: string input to be converted
+ *
+ * Return: string s converted to an integer
+ */
+
+int _atoi(char *s)
+{
+	unsigned int num = -1;
+	int sign = 1;
+
+	do {
+		if (*s == '-')
+		sign *= -1;
+		else if (*s >= '0' && *s <= '9')
+			num = (num * 10) + (*s - '0');
+		else if (num > 0)
+			break;
+	} while (s++);
+
+	return (num * sign);
+}
+
+/**
+ * _putchar - writes the character c to stdout
+ * @c: The character to print
+ *
+ * Return: On success 1.
+ * On error, -1 is returned, and errno is set appropriately.
+ */
+
+int _putchar(char c)
+{
+	return (write(STDOUT_FILENO, &c, 1));
+}
+
+/**
+ * _strlen - return the length of a string
+ *
+ * @s: string
+ *
+ * Return: the length of string s
+ */
+
+int _strlen(char *s)
+{
+	int len;
+
+	for (len = 0; *s != '\0'; len++)
+		s++;
+
+	return (len);
+}
+
+/**
+ * _puts - prints a string to stdout
+ *
+ * @str: string to be printed
+ *
+ * Return: Always void
  */
 
 void _puts(char *str)
 {
-	int k = 0;
+	int i = 0;
 
-	while (str[k])
-		_putchar(str[k]), k++;
-}
-
-/**
- * _putchar - prints a character
- * @ch: The character to be printed
- *
- * Return: 1 (success), -1 otherwise
- */
-
-int _putchar(char ch)
-{
-	return (write(STDOUT_FILENO, &ch, 1));
-}
-
-/**
- * _strcat - concatenates two strings together
- *
- * @dest: input string where ouput is gonna be saved
- * @src: input string that's gonna be concatenated
- *
- * Return: a pointer to char pointed to string dest
- */
-
-char *_strcat(char *dest, char *src)
-{
-	int k = 0;
-
-	/** compute the destination length*/
-	while (dest[k] != '\0')
-		k++;
-
-	while (*src != '\0')
-	{
-		dest[k] = *src;
-		src++;
-		k++;
-	}
-
-	dest[k] = '\0';
-
-	return (dest);
-}
-
-/**
- * _strncat - concatenates two strings up to n characaters
- * @dest: input string destination
- * @src: input string soucre
- * @n: number of characaters to be appended to string
- * Return: pointer to the new dest string
- */
-
-char *_strncat(char *dest, char *src, int n)
-{
-	int count = 0, k = 0;
-
-	/** compute the destination length*/
-	while (dest[k] != '\0')
-		k++;
-
-	while (count < n && *src != '\0')
-	{
-		dest[k] = *src;
-		src++;
-		k++;
-		count++;
-	}
-
-	dest[k] = '\0';
-
-	return (dest);
+	while (str[i])
+		_putchar(str[i]), i++;
 }
 

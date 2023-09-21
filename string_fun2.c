@@ -1,89 +1,31 @@
 #include "main.h"
 
 /**
- * _strlen - return'str strtring length
+ * _strcat - concatenates two strings together
  *
- * @str: input strtring
+ * @dest: input string where ouput is gonna be saved
+ * @src: input string that's gonna be concatenated
  *
- * Return: the length of strtring str
+ * Return: a pointer to char pointed to string dest
  */
 
-int _strlen(char *str)
-{
-	int len;
-
-	for (len = 0; *str != '\0'; len++)
-		str++;
-
-	return (len);
-}
-
-/**
- * _strcpy - copy strtring 2 into strtring 1.
- *
- * @dest: the strtring to be copied into
- * @src: the strtring to copy from
- *
- * Return: pointer to the copied strtring
- */
-
-char *_strcpy(char *dest, char *src)
-{
-	int i;
-
-	for (i = 0; *(src + i) != '\0'; i++)
-		dest[i] = *(src + i);
-
-	/** get lastrt char */
-	dest[i] = *(src + i);
-	return (dest);
-}
-
-/**
- * _strcmp - compares two strings
- *
- * @str1: first input string
- * @str2: second input string
- *
- * Return: an integer > 0 if s1 is greater than s2
- * < 0 if s1 is less than s2
- * or 0 if s1 equals s2
- */
-
-int _strcmp(char *str1, char *str2)
+char *_strcat(char *dest, char *src)
 {
 	int i = 0;
 
-	while (*(str1 + i) == *(str2 + i) && *(str1 + i) != '\0')
+	while (dest[i] != '\0')
 		i++;
 
-	return (*(str1 + i) - *(str2 + i));
-}
+	while (*src != '\0')
+	{
+		dest[i] = *src;
+		src++;
+		i++;
+	}
 
-/**
- * _atoi - converts a string to an integer
- *
- * @str: string input to be converted
- *
- * Return: string str converted to an integer
- */
+	dest[i] = '\0';
 
-int _atoi(char *str)
-{
-	int _sign = 1;
-	unsigned int num = -1;
-
-	do {
-		/** check the sign of the number */
-		if (*str == '-')
-			_sign *= -1;
-		else if (*str >= '0' && *str <= '9')
-			num = (num * 10) + (*str - '0');
-		else if (num > 0)
-			break;
-	} while (str++);
-
-	return (num * _sign);
+	return (dest);
 }
 
 /**
@@ -114,5 +56,71 @@ char *_strncpy(char *dest, char *src, int n)
 	}
 
 	return (dest);
+}
+
+/**
+ * _isdigit - checks if input is digit or not
+ *
+ * @c: char to be checked
+ *
+ * Return: 1 if char is digit, 0 otherwise
+ */
+
+int _isdigit(int c)
+{
+	if (c >= 48 && c < 58)
+		return (1);
+
+	return (0);
+}
+
+/**
+ * _strncat - concatenates two strings up to n characaters
+ *
+ * @dest: input string to which output is saved
+ * @src: input string to be apended
+ * @n: maximum number of characaters to be appended
+ * Return: pointer to the new dest string
+ */
+
+char *_strncat(char *dest, char *src, int n)
+{
+	int i = 0, cnt = 0;
+
+	while (dest[i] != '\0')
+		i++;
+	while (cnt < n && *src != '\0')
+	{
+		dest[i] = *src;
+		src++;
+		i++;
+		cnt++;
+	}
+
+	dest[i] = '\0';
+
+	return (dest);
+
+}
+
+/**
+ * _strcmp - compares two strings
+ *
+ * @s1: first input string
+ * @s2: second input string
+ *
+ * Return: an integer > 0 if s1 is greater than s2
+ * < 0 if s1 is less than s2
+ * or 0 if s1 equals s2
+ */
+
+int _strcmp(char *s1, char *s2)
+{
+	int i = 0;
+
+	while (*(s1 + i) == *(s2 + i) && *(s1 + i) != '\0')
+		i++;
+
+	return (*(s1 + i) - *(s2 + i));
 }
 
