@@ -134,7 +134,7 @@ int shell_handler(char n[])
 		return (r);
 	}
 
-	r = execute_command(o, Myenv, q);
+	r = execute_command(o, environ, q);
 	free(q);
 
 	return (r);

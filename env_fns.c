@@ -10,7 +10,7 @@
 char *_get_env(char *env_name)
 {
 	char *str_tok, *env_val = NULL;
-	char **env = Myenv, *var;
+	char **env = environ, *var;
 	int i = 0;
 
 	while (env[i])
@@ -46,7 +46,7 @@ char *_get_env(char *env_name)
  */
 void print_env(void)
 {
-	char **env = Myenv;
+	char **env = environ;
 
 	while (*env)
 	{

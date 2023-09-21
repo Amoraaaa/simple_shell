@@ -28,7 +28,7 @@
 #define ERROR_NOT_FOUND 127
 
 
-extern char **Myenv;
+extern char **environ;
 int EXIT_STATUS;
 
 int main_shell(char *);
