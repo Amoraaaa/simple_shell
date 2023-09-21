@@ -13,7 +13,7 @@ void sigint_handler(__attribute__((unused))int a)
 	exit(130);
 }
 /**
- * _puts_not_found - prints a not_found error msg to stderr
+ * not_found_err - prints a not_found error msg to stderr
  *
  * @b: executable file name
  * @c: command name
@@ -22,7 +22,7 @@ void sigint_handler(__attribute__((unused))int a)
  * Return: always void
 */
 
-void _puts_not_found(char *b, char *c, unsigned int d)
+void not_found_err(char *b, char *c, unsigned int d)
 {
 	char *cnt = to_str(d);
 
@@ -36,14 +36,14 @@ void _puts_not_found(char *b, char *c, unsigned int d)
 	EXIT_STATUS = 127;
 }
 /**
- * args_split - splits a string into array of words
+ * split_args - splits a string into array of words
  *
  * @e: string to be splitted
  *
  * Return: pointer to the newly created array
 */
 
-char **args_split(char *e)
+char **split_args(char *e)
 {
 	char *tok;
 	char **words = NULL;
