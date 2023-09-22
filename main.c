@@ -1,20 +1,17 @@
 #include "main.h"
 
 /**
- * main - The main function which acts as the entry point to the program.
+ * main - entry point
  *
- * @argument_count: The number of command-line arguments passed to the program.
- * @argument_values: An array of character pointers representing the command
+ * @argc: number of args
+ * @argv: array of args
  *
- * Return: The function always returns 0 indicating successful execution.
-*/
+ * Return: always 0
+ */
 
-int main(__attribute__((unused))int argument_count, char *argument_values[])
+int main(__attribute__((unused))int argc, char *argv[])
 {
-	/*Call the shell function with the first argument*/
-	main_shell(argument_values[0]);
-
-	/* Return 0 to indicate successful execution*/
+	shell(argv[0]);
 	return (0);
 }
 
