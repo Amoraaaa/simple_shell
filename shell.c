@@ -64,7 +64,7 @@ int run_command(char *args[], char *env[], char *path)
 int shell_handler(char command[])
 {
 	char *args[BUFF_SIZE], **ret, *env_path;
-	int exec = 0, i = 0;
+	int exec = 0, i = 0, exit_status;
 
 	ret = args_split(command);
 	if (!ret)
@@ -75,25 +75,32 @@ int shell_handler(char command[])
 
 	args[i] = NULL;
 	free(ret);
-
 	if (_strcmp(args[0], "env") == 0)
 	{
 		print_env();
 		free(env_path);
 		return (exec);
 	}
-
-	/** Checks if it's exit command and has an argument */
-
-	if (_strcmp(args[0], "exit") == 0 && args[1] != NULL)
+	else if (strcmp(args[0], "setenv") == 0)
+		exec = setenv_builtin(args);
+	else if (strcmp(args[0], "unsetenv") == 0)
+		exec = unsetenv_builtin(args);
+	else if (strcmp(args[0], "exit") == 0)
 	{
-		int exit_status = _atoi(args[1]);
-
-		free(env_path);
-		exit(exit_status);
+		if (args[1] != NULL)
+		{
+			exit_status = _atoi(args[1]);
+			free(env_path);
+			builtin_exit(exit_status);
+		}
+		else
+		{
+			free(env_path);
+			builtin_exit(0);
+		}
 	}
-
-	exec = run_command(args, __environ, env_path);
+	else
+		exec = run_command(args, __environ, env_path);
 	free(env_path);
 	return (exec);
 }

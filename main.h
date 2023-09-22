@@ -47,6 +47,8 @@ void builtin_exit(int);
 int check_command(char *, char *[]);
 void _puts_not_found(char *, char *, unsigned int);
 
+int unsetenv_builtin(char *[]);
+int setenv_builtin(char *[]);
 
 void afree(char **);
 void *_calloc(unsigned int, unsigned int);
