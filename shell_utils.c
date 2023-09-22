@@ -1,64 +1,83 @@
 #include "main.h"
-/**
- * sigint_handler - event handler for (CTRL+C) sigint signal
- *
- * @a: signal
- *
- * Return: always void
-*/
 
-void sigint_handler(__attribute__((unused))int a)
+/**
+ * trim_string - trims the starting and trailing spaces from string
+ *
+ * @str: string to be trimmed
+ *
+ * Return: pointer to the trimmed string
+ */
+
+char *trim_string(char *str)
 {
-	_putchar('\n');
-	exit(130);
-}
-/**
- * not_found_err - prints a not_found error msg to stderr
- *
- * @b: executable file name
- * @c: command name
- * @d: error count
- *
- * Return: always void
-*/
+	int i = 0, isalpha = 0;
+	char *ret = malloc(strlen(str) + 1);
 
-void not_found_err(char *b, char *c, unsigned int d)
+	while (str[i])
+	{
+		if (!str[i + 1] && (str[i] == ' ' || str[i] == '\n'))
+			break;
+		if (_isalpha(str[i]))
+			isalpha = 1;
+		ret[i] = str[i];
+		i++;
+	}
+	ret[i] = '\0';
+	if (!isalpha)
+	{
+		free(ret);
+		return (NULL);
+	}
+
+	return (ret);
+}
+
+/**
+ * count_words - counts the words in a string
+ *
+ * @str: string input
+ *
+ * Return: number of counted words
+ */
+
+unsigned int count_words(char *str)
 {
-	char *cnt = to_str(d);
+	unsigned int len = 0, i = 0;
 
-	_puts_err(b);
-	_puts_err(": ");
-	_puts_err(cnt);
-	_puts_err(": ");
-	_puts_err(c);
-	_puts_err(": not found\n");
-	free(cnt);
-	EXIT_STATUS = 127;
+	while (str[i] != '\0')
+	{
+		if (str[i] == ' ')
+			len++;
+		i++;
+	}
+
+	return (len + 1);
 }
+
 /**
- * split_args - splits a string into array of words
+ * args_split - splits a string into array of words
  *
- * @e: string to be splitted
+ * @str: string to be splitted
  *
  * Return: pointer to the newly created array
-*/
+ */
 
-char **split_args(char *e)
+char **args_split(char *str)
 {
 	char *tok;
 	char **words = NULL;
 	int i = 0, count = 0;
 
-	if (!e)
+	if (!str)
 		return (NULL);
 
-	count = count_words(e);
+	count = count_words(str);
 	words = malloc(sizeof(*words) * (count + 1));
 
 	if (!words)
 		return (NULL);
 
-	tok = strtok(e, " ");
+	tok = strtok(str, " ");
 	while (tok && i < count)
 	{
 		words[i] = tok;
@@ -70,57 +89,44 @@ char **split_args(char *e)
 
 	return (words);
 }
+
 /**
- * trim_string - trims the starting and trailing spaces from string
+ * _puts_not_found - prints a not_found error msg to stderr
  *
- * @f: string to be trimmed
+ * @prog_name: executable file name
+ * @name: command name
+ * @c: error count
  *
- * Return: pointer to the trimmed string
-*/
-
-char *trim_string(char *f)
+ * Return: always void
+ */
+void _puts_not_found(char *prog_name, char *name, unsigned int c)
 {
-	int i = 0, isalpha = 0;
-	char *ret = malloc(strlen(f) + 1);
+	char *cnt = to_str(c);
 
-	while (f[i])
-	{
-		if (!f[i + 1] && (f[i] == ' ' || f[i] == '\n'))
-			break;
-		if (_isalpha(f[i]))
-		{
-			isalpha = 1;
-			ret[i] = f[i];
-			i++;
-		}
-	}
-	ret[i] = '\0';
-	if (!isalpha)
-	{
-		free(ret);
-		return (NULL);
-	}
-
-	return (ret);
+	_eputs(prog_name);
+	_eputs(": ");
+	_eputs(cnt);
+	_eputs(": ");
+	_eputs(name);
+	_eputs(": not found\n");
+	free(cnt);
+	EXIT_ST = 127;
 }
+
 /**
- * count_words - counts the words in a string
+ * sigint_handler - event handler for (CTRL+C) sigint signal
  *
- * @g: string input size
+ * @sig: signal
  *
- * Return: number of counted words
-*/
+ * Return: always void
+ */
 
-unsigned int count_words(char *g)
+void sigint_handler(__attribute__((unused))int sig)
 {
-	unsigned int len = 0, i = 0;
-
-	while (g[i] != '\0')
-	{
-		if (g[i] == ' ')
-			len++;
-		i++;
-	}
-
-	return (len + 1);
+	_putchar('\n');
+	/* _puts(PROMPT); */
+	/* EXIT_ST = 130; */
+	exit(130);
 }
+
+
