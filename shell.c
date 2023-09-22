@@ -82,6 +82,17 @@ int shell_handler(char command[])
 		free(env_path);
 		return (exec);
 	}
+
+	/** Checks if it's exit command and has an argument */
+
+	if (_strcmp(args[0], "exit") == 0 && args[1] != NULL)
+	{
+		int exit_status = _atoi(args[1]);
+
+		free(env_path);
+		exit(exit_status);
+	}
+
 	exec = run_command(args, __environ, env_path);
 	free(env_path);
 	return (exec);
