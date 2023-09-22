@@ -77,12 +77,12 @@ char **args_split(char *str)
 	if (!words)
 		return (NULL);
 
-	tok = strtok(str, " ");
+	tok = strtok(str, " \t\n\r\f\v");
 	while (tok && i < count)
 	{
 		words[i] = tok;
 		i++;
-		tok = strtok(NULL, " ");
+		tok = strtok(NULL, " \t\n\r\f\v");
 	}
 
 	words[i] = NULL;
