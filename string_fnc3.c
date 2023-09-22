@@ -1,80 +1,63 @@
 #include "main.h"
 
 /**
- * _isalpha - Checks whether if input is an alphabetic character
+ * _strdup - allocates space in memory and fills it with the specified string
  *
- * @a: character to be checked
+ * @str: string to fill the allocated space with
  *
- * Return: 1 if char is alphabetic, 0 otherwise
-*/
+ * Return: a pointer to char to the newly created space
+ */
 
-int _isalpha(int a)
+char *_strdup(char *str)
 {
-	/** Check if the ASCII value of 'a' is within the range of lowercas */
-	if ((a >= 97 && a <= 122) || (a >= 65 && a <= 90))
-		return (1); /** Return 1 if 'a' is an alphabetic character */
-	return (0); /** Return 0 if 'a' is not an alphabetic character */
+	char *dup;
+	int cnt = 0, i = 0;
+
+	if (str == NULL)
+		return (NULL);
+
+	while (str[cnt])
+		cnt++;
+
+	dup = malloc((sizeof(*dup) * cnt) + 1);
+
+	if (dup == NULL)
+		return (NULL);
+
+	for (; i < cnt; i++)
+		dup[i] = str[i];
+
+	dup[i] = '\0';
+
+	return (dup);
 }
 
-/**
- * _strstr - locates a substring in a given string
- *
- * @b: input string to search in
- * @c: substring to search for
- *
- * Return: a pointer to the beginning of the substring if found
- * or NULL if not found
-*/
-
-char *_strstr(char *b, char *c)
-{
-	int d = 0, e = 0, tmpD = 0;
-
-	while (b[d] != '\0')
-	{
-		/** Check if characters in 'b' and 'c' match */
-		while (b[tmpD] == c[e] && c[e] != '\0')
-		{
-			e++;
-			tmpD++;
-		}
-
-		/** If characters in 'c' found in 'b', return point in 'b' */
-		if (c[e] == '\0')
-			return (b + d);
-
-		d++;
-		tmpD = d;
-		e = 0;
-	}
-	return (NULL); /** Return NULL if no substring 'c' is found in 'b' */
-}
 
 /**
  * _strrchr - locates a character in a string
  *
- * @f: input string
- * @g: character to search for
+ * @s: input string
+ * @c: character to search for
  *
- * Return: returns a pointer to the first occurrence of g
- * or NULL if g is not found
-*/
+ * Return: returns a pointer to the first occurence of c
+ * or NULL if c is not found
+ */
 
-char *_strrchr(char *f, char g)
+char *_strrchr(char *s, char c)
 {
-	int h = _strlen(f);
+	int i = _strlen(s);
 
-	if (g == '\0')
-		return (f + h);
+	if (c == '\0')
+		return (s + i);
 
-	h--;
+	i--;
 
-	while (*(f + h) != '\0')
+	while (*(s + i) != '\0')
 	{
-		if (*(f + h) == g)
-			return (f + h + 1);
+		if (*(s + i) == c)
+			return (s + i + 1);
 
-		h--;
+		i--;
 	}
 
 	return (NULL);
@@ -83,25 +66,25 @@ char *_strrchr(char *f, char g)
 /**
  * _strpbrk - searches a string for any of a set of bytes
  *
- * @i: input string
- * @j: set of bytes used for searching
- *
- * Return: a pointer to the byte in i that matches one
+ * @s: input string
+ * @accept: set of bytes used for searching
+n *
+ * Return: a pointer to the byte in s that matches one
  * of the bytes in accept
  * Or NULL if no matches
-*/
+ */
 
-char *_strpbrk(char *i, char *j)
+char *_strpbrk(char *s, char *accept)
 {
 	int Ocnt = 0, Pcnt = 0;
 
-	while (*(i + Ocnt) != '\0')
+	while (*(s + Ocnt) != '\0')
 	{
 		Pcnt = 0;
-		while (*(j + Pcnt) != '\0')
+		while (*(accept + Pcnt) != '\0')
 		{
-			if (*(j + Pcnt) == *(i + Ocnt))
-				return (i + Ocnt);
+			if (*(accept + Pcnt) == *(s + Ocnt))
+				return (s + Ocnt);
 			Pcnt++;
 		}
 
@@ -111,38 +94,50 @@ char *_strpbrk(char *i, char *j)
 }
 
 /**
- * _strdup - allocates space in memory and fills it with the specified string
+ * _strstr - locates a substring in a given string
  *
- * @k: string to fill the allocated space with
+ * @haystack: input string to search in
+ * @needle: substring to search for
  *
- * Return: a pointer to char to the newly created space
-*/
+ * Return: a pointer to the beggining of the substring if found
+ * or NULL if not found
+ */
 
-char *_strdup(char *k)
+
+char *_strstr(char *haystack, char *needle)
 {
-	char *dup;
-	int cnt = 0, l = 0;
+	int i = 0, j = 0, tmpI = 0;
 
-	/** If 'k' is NULL, return NULL */
-	if (k == NULL)
-		return (NULL);
+	while (haystack[i] != '\0')
+	{
 
-	/** Get length of 'k' */
-	while (k[cnt])
-		cnt++;
+		while (haystack[tmpI] == needle[j] && needle[j] != '\0')
+		{
+			j++;
+			tmpI++;
+		}
 
-	/** Allocate memory for 'dup' */
-	dup = malloc((sizeof(*dup) * cnt) + 1);
+		if (needle[j] == '\0')
+			return (haystack + i);
 
-	/** If memory allocation fails, return NULL */
-	if (dup == NULL)
-		return (NULL);
+		i++;
+		tmpI = i;
+		j = 0;
+	}
+	return (NULL);
+}
 
-	/** Copy characters from 'k' to 'dup' */
-	for (; l < cnt; l++)
-		dup[l] = k[l];
+/**
+ * _isalpha - Checks wether if input is alphabetic character
+ *
+ * @c: character to be checked
+ *
+ * Return: 1 if char is alphabetic, 0 otherwise
+ */
 
-	dup[l] = '\0'; /** Null-terminate 'dup' */
-
-	return (dup); /** Return pointer to newly allocate 'k' */
+int _isalpha(int c)
+{
+	if ((c >= 97 && c <= 122) || (c >= 65 && c <= 90))
+		return (1);
+	return (0);
 }
