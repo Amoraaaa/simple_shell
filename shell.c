@@ -64,7 +64,7 @@ int run_command(char *args[], char *env[], char *path)
 int shell_handler(char command[])
 {
 	char *args[BUFF_SIZE], **ret, *env_path;
-	int exec = 0, i = 0, exit_status;
+	int exec = 0, i = 0;
 
 	ret = args_split(command);
 	if (!ret)
@@ -81,26 +81,12 @@ int shell_handler(char command[])
 		free(env_path);
 		return (exec);
 	}
-	else if (strcmp(args[0], "setenv") == 0)
-		exec = setenv_builtin(args);
-	else if (strcmp(args[0], "unsetenv") == 0)
-		exec = unsetenv_builtin(args);
-	else if (strcmp(args[0], "exit") == 0)
-	{
-		if (args[1] != NULL)
-		{
-			exit_status = _atoi(args[1]);
-			free(env_path);
-			builtin_exit(exit_status);
-		}
-		else
-		{
-			free(env_path);
-			builtin_exit(0);
-		}
-	}
 	else
+		exec = builtin_commands_handling(args, env_path);
+
+	if (exec == 0)
 		exec = run_command(args, __environ, env_path);
+
 	free(env_path);
 	return (exec);
 }

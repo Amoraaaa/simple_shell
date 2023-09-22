@@ -49,6 +49,8 @@ void _puts_not_found(char *, char *, unsigned int);
 
 int unsetenv_builtin(char *[]);
 int setenv_builtin(char *[]);
+int builtin_commands_handling(char *[], char *);
+int builtin_cd(char *[]);
 
 void afree(char **);
 void *_calloc(unsigned int, unsigned int);
