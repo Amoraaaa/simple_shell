@@ -73,20 +73,34 @@ int shell_handler(char command[])
 	while (ret[i])
 		args[i] = ret[i], i++;
 
-	args[i] = NULL;
-	free(ret);
+	args[i] = NULL, free(ret);
 	if (_strcmp(args[0], "env") == 0)
 	{
-		print_env();
-		free(env_path);
+		print_env(), free(env_path);
 		return (exec);
 	}
+	else if (strcmp(args[0], "setenv") == 0)
+		exec = setenv_builtin(args);
+	else if (strcmp(args[0], "unsetenv") == 0)
+		exec = unsetenv_builtin(args);
+	else if (strcmp(args[0], "cd") == 0)
+		exec = builtin_cd(args);
+	else if (strcmp(args[0], "exit") == 0)
+	{
+		if (args[1] != NULL)
+		{
+			int exit_status = _atoi(args[1]);
+
+			free(env_path);
+			builtin_exit(exit_status);
+		}
+		else
+		{
+			free(env_path), builtin_exit(0);
+		}
+	}
 	else
-		exec = builtin_commands_handling(args, env_path);
-
-	if (exec == 0)
 		exec = run_command(args, __environ, env_path);
-
 	free(env_path);
 	return (exec);
 }
